@@ -21,6 +21,10 @@ import com.example.catalogo_backend.services.ProductService;
 
 import jakarta.persistence.EntityNotFoundException;
 
+/**
+ * Controller REST per la gestione dell'entità Product.
+ * Implementa tutte le operazioni CRUD e il listing avanzato con filtri e paginazione.
+ */
 @RestController
 @RequestMapping("/api/products")
 @CrossOrigin(origins = "http://localhost:5173")
@@ -29,7 +33,17 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	// --- LIST (con Filtri e Paginazione) ---
+	/**
+     * Recupera una pagina di Prodotti con filtri e ordinamento opzionali.
+     * @param search Termine di ricerca testuale (nome o tags).
+     * @param categoryId ID della categoria per il filtro.
+     * @param minPrice Prezzo minimo.
+     * @param maxPrice Prezzo massimo.
+     * @param sortBy Campo per l'ordinamento ("id", "price", "createdAt").
+     * @param page Numero di pagina (default 0).
+     * @param size Dimensione della pagina (default 20).
+     * @return Un oggetto Page<Product> contenente i risultati e i metadati di paginazione.
+     */
 	@GetMapping
 	 public Page<Product> getAllProducts(
 	            @RequestParam(required = false) String search,
@@ -43,7 +57,11 @@ public class ProductController {
 	        return productService.getAllProducts(search, categoryId, minPrice, maxPrice, sortBy, page, size);
 	}
 	
-	// --- GET by ID ---
+	/**
+     * Recupera un singolo prodotto tramite il suo ID.
+     * @param id ID del prodotto.
+     * @return ResponseEntity contenente il prodotto o uno stato 404 NOT FOUND.
+     */
 	@GetMapping("/{id}")
 	public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         try {
@@ -54,7 +72,12 @@ public class ProductController {
         }
     }
 	
-	// --- CREATE ---
+	/**
+     * Crea un nuovo prodotto.
+     * Esegue la validazione del prezzo e del nome.
+     * @param product Dati del prodotto (ricevuti nel corpo della richiesta JSON).
+     * @return ResponseEntity contenente il prodotto creato e stato 201 CREATED.
+     */
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         // Validazione: price >= 0
@@ -70,7 +93,13 @@ public class ProductController {
         return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
     }
 
-    // --- UPDATE ---
+    /**
+     * Aggiorna un prodotto esistente tramite ID.
+     * Esegue la validazione del prezzo.
+     * @param id ID del prodotto da aggiornare.
+     * @param productDetails Dati aggiornati del prodotto.
+     * @return ResponseEntity contenente il prodotto aggiornato o stato 404 NOT FOUND.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product productDetails) {
         // Validazione: price >= 0
@@ -86,7 +115,11 @@ public class ProductController {
         }
     }
 
-    // --- DELETE ---
+    /**
+     * Elimina un prodotto tramite ID.
+     * @param id ID del prodotto da eliminare.
+     * @return ResponseEntity con stato 204 NO CONTENT in caso di successo o 404 NOT FOUND.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         try {

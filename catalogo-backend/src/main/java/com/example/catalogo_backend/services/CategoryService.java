@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 import com.example.catalogo_backend.entities.Category;
 import com.example.catalogo_backend.repositories.CategoryRepository;
 
+/**
+ * Service layer per la gestione della logica di business relativa alle Categorie.
+ * Interagisce con CategoryRepository.
+ */
 @Service
 public class CategoryService {
 	@Autowired

@@ -16,6 +16,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Entità JPA che rappresenta un Prodotto.
+ * Gestisce la relazione ManyToOne con Category e imposta automaticamente il campo createdAt.
+ */
 @Entity
 @Data
 @NoArgsConstructor

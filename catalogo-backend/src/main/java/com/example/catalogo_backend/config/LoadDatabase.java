@@ -11,6 +11,12 @@ import com.example.catalogo_backend.repositories.ProductRepository;
 
 @Configuration
 public class LoadDatabase {
+	/**
+     * Bean eseguito all'avvio dell'applicazione per inizializzare il database.
+     * @param categoryRepository Repository per la gestione delle Categorie.
+     * @param productRepository Repository per la gestione dei Prodotti.
+     * @return CommandLineRunner che esegue la logica di seeding.
+     */
 	@Bean
 	CommandLineRunner initDatabase(CategoryRepository categoryRepository, ProductRepository productRepository) {
 		return args -> {

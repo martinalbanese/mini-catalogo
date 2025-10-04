@@ -6,6 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import com.example.catalogo_backend.entities.Product;
 
+/**
+ * Repository per l'entità Product.
+ * Estende JpaSpecificationExecutor per consentire query dinamiche avanzate (filtri).
+ */
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product>{
 

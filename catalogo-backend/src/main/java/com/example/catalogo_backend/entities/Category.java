@@ -11,6 +11,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Entità JPA che rappresenta una Categoria di prodotti.
+ * Mappata alla tabella 'categories'.
+ */
 
 @Entity
 @Data

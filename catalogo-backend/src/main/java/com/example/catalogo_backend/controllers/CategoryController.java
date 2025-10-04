@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.catalogo_backend.entities.Category;
 import com.example.catalogo_backend.services.CategoryService;
 
+/**
+ * Controller REST per la gestione dell'entità Category.
+ * Espone endpoint per listare e creare nuove categorie.
+ */
+
 @RestController
 @RequestMapping("/api/categories")
 @CrossOrigin(origins = "http://localhost:5173")
@@ -20,11 +25,20 @@ public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 	
+	/**
+     * Recupera l'elenco completo di tutte le categorie.
+     * @return Lista di oggetti Category.
+     */
 	@GetMapping
 	public List<Category> getAllCategories() {
 		return categoryService.getAllCategories();
 	}
 	
+	/**
+     * Crea una nuova categoria.
+     * @param category Dati della categoria da creare (ricevuti nel corpo della richiesta JSON).
+     * @return La categoria creata con l'ID assegnato.
+     */
 	@PostMapping
 	public Category createCategory(@RequestBody Category category) {
 		return categoryService.createCategory(category);

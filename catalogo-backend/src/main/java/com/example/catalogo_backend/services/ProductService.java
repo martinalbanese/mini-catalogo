@@ -14,6 +14,10 @@ import com.example.catalogo_backend.specifications.ProductSpecifications;
 
 import jakarta.persistence.EntityNotFoundException;
 
+/**
+ * Service layer per la gestione della logica di business relativa ai Prodotti.
+ * Implementa i metodi CRUD e la logica avanzata di listing/filtraggio.
+ */
 @Service
 public class ProductService {
 	@Autowired
