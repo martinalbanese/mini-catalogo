@@ -1,0 +1,325 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7f6;
+  margin: 0;
+}
+
+/* Stile per il Container Principale*/
+.category-container {
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+
+.category-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.category-header h1 {
+  color: #333;
+  font-size: 2em;
+  margin: 0;
+}
+
+/* --- Stile Lista Categorie --- */
+.category-list {
+  list-style: none;
+  padding: 0;
+}
+
+.category-list li {
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  transition: background-color 0.2s;
+  font-size: 1em;
+  color: #495057;
+  font-weight: bold;
+}
+
+.category-list li:hover {
+  background-color: #dee2e6;
+}
+
+/* --- Stile Form di Creazione --- */
+.create-form-container {
+  padding: 20px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  margin-top: 20px;
+  background: #f8f9fa;
+}
+
+.category-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start !important;
+  gap: 10px;
+  align-items: center;
+}
+
+.category-form input[type="text"] {
+  flex-grow: 1;
+  padding: 12px;
+  border: 1px solid #adb5bd;
+  border-radius: 20px;
+  font-size: 1em;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.category-form input[type="text"]:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.category-form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: bold;
+}
+
+.category-form button:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.category-form button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Stile per il Container Prodotti ) */
+.product-list-container,
+.product-form-container {
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+/* Header per allineamento titolo/bottone */
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.product-header h1 {
+  color: #333;
+  font-size: 2em;
+  margin: 0;
+}
+
+/* Stile comune per i bottoni principali */
+.btn-primary {
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 20px;
+  background-color: #218838;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: white;
+  color: #218838;
+}
+
+.btn-outline {
+  background-color: white;
+  border: 2px solid #218838;
+  color: #218838;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-outline:hover:not(:disabled) {
+  background-color: #218838;
+  color: white;
+}
+
+.btn-pagination {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 20px;
+  background-color: #6c757d;
+  color: white;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+/* --- Filtri e Ricerca --- */
+.filters-area {
+  border-radius: 10px;
+  margin: 15px 0 !important;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.filters-area select {
+  min-width: 150px;
+
+}
+
+/* Bottone per applicare i filtri */
+.btn-filter-apply {
+  background-color: #28a745 !important;
+  color: white !important;
+}
+
+/* Bottone Reset */
+.btn-filter-reset {
+  padding: 8px 15px;
+  border-radius: 20px;
+  background-color: #f8f9fa !important;
+  color: #333 !important;
+  border: 1px solid #ced4da !important;
+}
+
+/* Stile per i bottoni di Paginazione */
+.btn-pagination {
+  padding: 8px 15px;
+  border: 1px solid gray;
+  border-radius: 20px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-pagination:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.filters-area input,
+.filters-area select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+.filters-area button {
+  padding: 8px 15px;
+  border: none;
+
+  border-radius: 20px;
+  background-color: #6c757d;
+  color: white;
+  cursor: pointer;
+}
+
+/* Stile per l'area di ordinamento */
+.sorting-area {
+  border-radius: 10px;
+  margin: 15px 0 !important;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.sorting-area select {
+  min-width: 150px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin-left: 10px;
+
+}
+
+/* Card Prodotto */
+.product-card {
+  background: #fff;
+  border: 1px solid #dee2e6 !important;
+  padding: 15px;
+  margin-bottom: 15px !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.product-card h3 {
+  margin-top: 0;
+  color: black;
+}
+
+.product-card p {
+  margin: 5px 0;
+  font-size: 0.95em;
+  color: #6c757d;
+}
+
+.product-card button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.btn-edit {
+  background-color: #ffc107;
+  color: #333;
+  border-radius: 20px !important;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+  margin-left: 10px;
+  border-radius: 20px !important;
+}
+
+/* Stile Form Prodotto */
+.product-form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.product-form-container label {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.product-form-container input[type="text"],
+.product-form-container input[type="number"],
+.product-form-container select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #adb5bd;
+  border-radius: 8px;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
+.product-form-container button[type="submit"] {
+
+  padding: 12px 20px;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: white;
+  margin-top: 15px;
+}
