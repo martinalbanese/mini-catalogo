@@ -1,0 +1,125 @@
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Docker Compose reference guide at
+# https://docs.docker.com/go/compose-spec-reference/
+
+# Here the instructions define your application as a service called "app".
+# This service is built from the Dockerfile in the current directory.
+# You can add other services your application may depend on here, such as a
+# database or a cache. For examples, see the Awesome Compose repository:
+# https://github.com/docker/awesome-compose
+services:
+  # app:
+  #   build:
+  #     context: .
+  #     target: final
+  #   # If your application exposes a port, uncomment the following lines and change
+  #   # the port numbers as needed. The first number is the host port and the second
+  #   # is the port inside the container.
+  #   # ports:
+  #   #   - 8080:8080
+  #   ports:
+  #     - 8080:8080
+  #     - 5173:5173
+  #     - 3306:3306
+
+    # The commented out section below is an example of how to define a PostgreSQL
+    # database that your application can use. `depends_on` tells Docker Compose to
+    # start the database before your application. The `db-data` volume persists the
+    # database data between container restarts. The `db-password` secret is used
+    # to set the database password. You must create `db/password.txt` and add
+    # a password of your choosing to it before running `docker compose up`.
+    #     depends_on:
+    #       db:
+    #         condition: service_healthy
+    #   db:
+    #     image: postgres
+    #     restart: always
+    #     user: postgres
+    #     secrets:
+    #       - db-password
+    #     volumes:
+    #       - db-data:/var/lib/postgresql/data
+    #     environment:
+    #       - POSTGRES_DB=example
+    #       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+    #     expose:
+    #       - 5432
+    #     healthcheck:
+    #       test: [ "CMD", "pg_isready" ]
+    #       interval: 10s
+    #       timeout: 5s
+    #       retries: 5
+    # volumes:
+    #   db-data:
+    # secrets:
+    #   db-password:
+    #     file: db/password.txt
+
+    db:
+      image: mysql:8.0
+      container_name: mysql-catalogo-db
+      restart: always
+      environment:
+        # Credenziali DB specificate dall'utente
+        MYSQL_ROOT_PASSWORD: 19112017Vik!
+        MYSQL_DATABASE: mini_catalogo_db
+        MYSQL_USER: test
+        MYSQL_PASSWORD: test
+      volumes:
+        # Persiste i dati del database sul tuo host
+        - db-data:/var/lib/mysql
+      ports:
+        # Espone la porta MySQL solo per debug o connessioni esterne dirette (opzionale)
+        - "3307:3306" 
+      healthcheck:
+        test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+        interval: 10s
+        timeout: 5s
+        retries: 5
+
+    backend:
+      build:
+        context: ./catalogo-backend
+        # Assumo che 'final' sia il target del tuo Dockerfile per il JAR
+        target: final  # Utilizza il tuo Dockerfile nella directory corrente
+      container_name: catalogo-backend
+      restart: always
+      depends_on:
+        # Attende che il DB sia pronto prima di avviare l'app
+        db:
+          condition: service_healthy
+      command: [
+        "sh",
+        "-c",
+        "sleep 15 && java org.springframework.boot.loader.launch.JarLauncher"
+      ]
+      environment:
+        # Variabili d'ambiente per connettere Spring al container 'db'
+        # L'hostname è il nome del servizio (db)
+        SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/mini_catalogo_db?createDatabaseIfNotExist=true
+        SPRING_DATASOURCE_USERNAME: test
+        SPRING_DATASOURCE_PASSWORD: test
+        # Assicurati che Spring sia in ascolto su tutte le interfacce
+        SERVER_PORT: 8080
+      ports:
+        # Mappa la porta di Spring Boot (8080) sul tuo host
+        - "8080:8080"
+    
+    frontend:
+    # NOTA: Devi avere un Dockerfile per la tua applicazione React
+      build: 
+        context: ./catalogo_frontend 
+      container_name: catalogo-frontend
+      restart: always
+      depends_on:
+        # Dipende dal backend per le chiamate API
+        - backend 
+      ports:
+        # Mappa la porta di sviluppo/servizio React (5173) sul tuo host
+        - "5173:5173" 
+      environment:
+        # Importante: React chiama il backend usando l'indirizzo esposto
+        VITE_BASE_API_URL: http://localhost:8080/api
+    
+volumes:
+  db-data:
