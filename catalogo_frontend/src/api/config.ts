@@ -5,3 +5,4 @@
 
 export const BASE_URL = 'http://localhost:8080/api';
 export const URL_CATEGORIES = `${BASE_URL}/categories`;
+export const URL_PRODUCTS = `${BASE_URL}/products`;
